@@ -8,11 +8,11 @@ N=2.^N;
 for K=N
     r=zeros(1,K);
     p=primes((L+1)*log2(K));
-    rounds=zeros(length(p)+1,K);
+    S=zeros(length(p)+1,K);
     for j=2:(length(p)+1)
         for ll=1:K 
-            rounds(1,ll)=ll;
-            rounds(j,ll)=mod(ll,p(j-1));
+            S(1,ll)=ll;
+            S(j,ll)=mod(ll,p(j-1));
         end
      end
     rn=zeros(1,n);
@@ -42,12 +42,12 @@ for K=N
         br=0;
                 for m=1:length(p)
 %                     links=0;                    
-                    a=zeros(length(unique(rounds(m+1,:))));
-                    a=unique(rounds(m+1,:));
+                    a=zeros(length(unique(S(m+1,:))));
+                    a=unique(S(m+1,:));
                     for i=a
                         H_active=H;                                        %without IC 
 %                        H_active=H-H_channel;                             %with IC 
-                        C1=find(not(rounds(m+1,:)==i));                    %find indices for all transmitters that are not active
+                        C1=find(not(S(m+1,:)==i));                    %find indices for all transmitters that are not active
                         for c1=1:length(C1)
                             H_active(:,C1(c1))=0;                          %set all inactive links to 0
                         end
