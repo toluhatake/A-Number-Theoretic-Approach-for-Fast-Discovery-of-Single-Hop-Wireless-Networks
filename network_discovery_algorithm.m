@@ -47,9 +47,10 @@ for K=N
                     for i=a
                         H_active=H;                                        %without IC 
 %                        H_active=H-H_channel;                             %with IC 
-                        C1=find(not(S(m+1,:)==i));                    %find indices for all transmitters that are not active
-                        for c1=1:length(C1)
-                            H_active(:,C1(c1))=0;                          %set all inactive links to 0
+                        for l=1:K                                          %find indices for all transmitters that are not active
+                            if(not(S(m+1,l)==i))
+                                H_active(:,l)=0;                           %set all inactive links to 0
+                            end
                         end
                         for j=1:K                                          %iterate over whole network
                             if (sum(H_active(j,:))==1)                     %look for receivers that have only one connection after ignoring the diactivated transmitters 
